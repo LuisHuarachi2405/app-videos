@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import { AxiosCall } from '../models/axios-call.model';
-import PropTypes from "prop-types";
 
 const useFetchAndLoad = () => {
   const [loading, setLoading] = useState(false);
@@ -9,10 +7,14 @@ const useFetchAndLoad = () => {
   const callEndpoint = async (axiosCall) => {
     if (axiosCall.controller) controller = axiosCall.controller;
     setLoading(true);
+
     let result = {};
+
     try {
       result = await axiosCall.call;
+      console.log(result);
     } catch (err) {
+      console.log("hay error");
       setLoading(false);
       throw err;
     }

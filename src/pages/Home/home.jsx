@@ -5,17 +5,35 @@ import { getMovies } from "../../services/public.service";
 
 export const Home = () => {
   const { loading, callEndpoint } = useFetchAndLoad();
-  const [movies, setMovies] = useState(null);
+  const [ movies, setMovies ] = useState([]);
 
-  const getApiData = async () => await callEndpoint(getMovies(2));
-  console.log(getApiData)
+  const getApiData = async () => await callEndpoint(getMovies());
 
-  const adaptMorty = (data) => {
-    setMovies(data.name);
+  const adaptMovies = (data) => {
+    setMovies(data.results);
   };
 
-  useAsync(getApiData, adaptMorty, () => {});
-  return <div>{loading ? 'LOADING' : movies}</div>;
+  console.log(movies);
+
+  useAsync(getApiData, adaptMovies, () => {});
+
+  const RenderMovies = ({movies}) => {
+    movies.map((movie, index) => {
+      return <p key={index}>{ movie.name }</p>
+    })
+  }
+
+  return (
+    <div>
+      {
+        loading ? 'LOADING' 
+        :
+        <div>
+          asdasd
+        </div> 
+      }
+    </div>
+  )
 }
 
 export default Home
