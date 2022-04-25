@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAsync } from "../../hooks/asyncComponentClean.hook";
 import useFetchAndLoad from "../../hooks/useFetchAndLoad";
 import { getMovies } from "../../services/public.service";
+import CarouselMovies from "./components/carousel";
 
 export const Home = () => {
   const { loading, callEndpoint } = useFetchAndLoad();
@@ -13,24 +14,15 @@ export const Home = () => {
     setMovies(data.results);
   };
 
-  console.log(movies);
-
   useAsync(getApiData, adaptMovies, () => {});
-
-  const RenderMovies = ({movies}) => {
-    movies.map((movie, index) => {
-      return <p key={index}>{ movie.name }</p>
-    })
-  }
 
   return (
     <div>
       {
-        loading ? 'LOADING' 
+        loading ? 
+        <p>loading</p>
         :
-        <div>
-          asdasd
-        </div> 
+        <CarouselMovies movies={movies} />
       }
     </div>
   )

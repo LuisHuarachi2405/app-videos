@@ -8,7 +8,7 @@ export const getMovies = (movieId) => {
   const controller = loadAbort();
 
   return {
-    call: axios.get(`https://api.themoviedb.org/3/movie/2/lists?api_key=317ac6324e75d960349be28e8daf8463&language=us-Us&page=1`, { signal: controller.signal }),
+    call: axios.get(`https://api.themoviedb.org/3/movie/550/lists?api_key=317ac6324e75d960349be28e8daf8463&language=us-Us&page=1`, { signal: controller.signal }),
     controller
   }
 }

@@ -9,8 +9,12 @@ export const useAsync = (
   useEffect(() => {
     let isActive = true;
     asyncFn().then((result) => {
+      console.log(result);
       if (isActive) successFunction(result.data);
-    });
+    }).catch(e => {
+      
+    })
+
     return () => {
       returnFunction && returnFunction();
       isActive = false;
